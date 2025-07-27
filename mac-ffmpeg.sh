@@ -109,8 +109,8 @@ handle_single_file_conversion() {
         fi
 
         ext="${input_file_path##*.}"
-        if [[ ! "$ext" =~ ^(wav|mp3|m4a)$ ]]; then
-            echo "対応していないファイル形式です。WAV, MP3, M4A ファイルのみ対応しています。"
+        if [[ ! "$ext" =~ ^(wav|mp3|m4a|wma)$ ]]; then
+            echo "対応していないファイル形式です。WAV, MP3, M4A, WMA ファイルのみ対応しています。"
             continue
         fi
 
@@ -137,7 +137,7 @@ handle_directory_conversion() {
         local target_files=()
         while IFS= read -r file; do
             target_files+=("$file")
-        done < <(find "$dir_path" -maxdepth 1 -type f \( -iname "*.wav" -o -iname "*.mp3" -o -iname "*.m4a" \))
+        done < <(find "$dir_path" -maxdepth 1 -type f \( -iname "*.wav" -o -iname "*.mp3" -o -iname "*.m4a" -o -iname "*.wma" \))
 
         local total_files=${#target_files[@]}
         if [ $total_files -eq 0 ]; then
